@@ -2,7 +2,7 @@
   "name": "chataserver",
   "version": "1.0.0",
   "description": "socket io chat server",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "test"
   },
