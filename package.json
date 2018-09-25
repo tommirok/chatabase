@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "install": "npm run install:client && npm run install:server",
+    "install:client": "(cd ./client && npm install)",
+    "install:server": "(cd ./server && npm install)",
+    "start": "npm run start:dev",
+    "start:dev": "npm run start:server",
+    "start:client": "(cd ./client && npm run start)",
+    "start:server": "(cd ./server && npm run start)"
   },
   "repository": {
     "type": "git",
