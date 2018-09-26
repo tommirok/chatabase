@@ -20,9 +20,17 @@ var Topic = Database.sequelize.define('Topic', {
 var User = Database.sequelize.define('User', {
   id: { type: Database.DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   username: Database.DataTypes.STRING,
-  password: Database.DataTypes.STRING,
+  password: Database.DataTypes.STRING, 
+},{
+  tableName: "User"
 });
-
+User.sync({ force: true }).then(() => {
+  // Table created
+  return User.create({
+    username: 'testi',
+    password: 'sala'
+  });
+});
 Message.belongsTo(User);
 Message.belongsTo(Topic);
 Reply.belongsTo(Message);
@@ -32,6 +40,7 @@ Message.hasMany(Reply);
 Topic.hasMany(Message);
 User.hasMany(Message);
 User.hasMany(Reply);
+
 
 module.exports = {
   Message: Message,
