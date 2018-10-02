@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Route, BrowserRouter } from 'react-router-dom';
 import Home from './components/Home';
-import About from './components/About';
+import Chat from './components/Chat';
+import Login from './components/Login';
 import Layout from './components/Layout';
+import Register from './components/Register';
 import { Provider } from 'react-redux';
 import store from "./state/store"
 class App extends Component {
@@ -13,7 +14,9 @@ class App extends Component {
         <BrowserRouter>
           <Layout>
             <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
+            <Route path="/chat" component={Chat} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
           </Layout>
         </BrowserRouter>
       </Provider>

@@ -4,25 +4,27 @@ var Message = Database.sequelize.define('Message', {
   id: { type: Database.DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   title: Database.DataTypes.STRING,
   content: Database.DataTypes.TEXT
-});
+},{tableNmae: "Messages"});
 
 var Reply = Database.sequelize.define('Reply', {
   id: { type: Database.DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   content: Database.DataTypes.TEXT
-});
+},{tableName: "Replies"});
 
 var Topic = Database.sequelize.define('Topic', {
   id: { type: Database.DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   name: Database.DataTypes.STRING,
-  description: Database.DataTypes.TEXT
-});
+  description: Database.DataTypes.TEXT,
+
+},
+  { tableName: "Topics"});
 
 var User = Database.sequelize.define('User', {
   id: { type: Database.DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   username: Database.DataTypes.STRING,
   password: Database.DataTypes.STRING, 
 },{
-  tableName: "User"
+  tableName: "Users"
 });
 User.sync({ force: true }).then(() => {
   // Table created
@@ -31,6 +33,23 @@ User.sync({ force: true }).then(() => {
     password: 'sala'
   });
 });
+Topic.sync({ force: true }).then(() => {
+  return Topic.create({
+    name: "testi",
+    description: "this topic is only for testing purposes"
+  })
+})
+Message.sync({force: true}). then(() => {
+  return Message.create({
+    title: "test message",
+    content: "this is test message"
+  })
+})
+Reply.sync({ force: true }).then(() => {
+  return Reply.create({
+    content: "this reply"
+  })
+})
 Message.belongsTo(User);
 Message.belongsTo(Topic);
 Reply.belongsTo(Message);
