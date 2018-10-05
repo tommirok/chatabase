@@ -1,6 +1,5 @@
 import types from '../actionTypes/authTypes';
 import { userService } from '../../service/userService';
-import { alertActions } from './alertActions';
 import {history} from '../../helpers/history';
 
 const _login = () => ({
@@ -14,21 +13,30 @@ const _loginRejected = (error) => ({
   type: types.LOGIN_FAILURE,
   error
 })
-export const login = (username, password) => (dispatch) => {
+export const login = (user) => (dispatch) => {
   
-    dispatch(_login())
+  dispatch(_login());
 
-   return userService.login(username, password)
-      .then(
-        user => {
-          dispatch(_loginSuccess(user));
-          history.push('/chat');
+  return userService.login(user)
+    .then(
+      resp => {
+        console.log(resp);
+        if (resp.status !== 200) {
+          return Promise.reject(resp)
         }
-      )
-      .catch(err => {
-        dispatch(_loginRejected(err));
-        dispatch(alertActions.error(err.toString()));
-      })
+        localStorage.setItem("user", JSON.stringify(resp.user));
+        dispatch(_loginSuccess(resp.user));
+        
+        history.push('/chat');
+        return resp
+      }
+    )
+    .catch(err => {
+      dispatch(_loginRejected(err));
+
+      return Promise.reject(err)
+    })
+
 }
 
 export const logout = () => (dispatch) => {

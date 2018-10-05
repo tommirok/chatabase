@@ -43,8 +43,6 @@ router.post('/', function (req, res, next) {
 // AUTHENTICATE ==>>
 router.post('/authenticate', function (req, res, next) {
   const userToCheck = req.body;
-  console.log(userToCheck);
-  
   User.findOne({
     where: {
       username: userToCheck.username
@@ -60,9 +58,10 @@ router.post('/authenticate', function (req, res, next) {
    // if password is ok, sign and return token to logging user
     var token = JWT.sign({ username: user.username, userid: user.id }, secret, { expiresIn: 86400 })
     userToAdd = user
-    res.send(200, { token: token, auth: true, username: user.username, userId: user.id });
+    res.send({ status: 200, user: { token: token, auth: true, userData: user } });
   })
   .catch(err => {
+    console.log(err)
     return res.send(500, {message: 'Error on the server.', error: err});
   })
   

@@ -33,7 +33,9 @@ export default class Register extends Component {
       console.log(this.state);
       this.props.register(this.state.user)
       .then(() => {
-        this.props.history.push("/chat")
+        this.props.login(this.state.user).then(() =>{
+          this.props.history.push("/chat")
+        })
       })
       .catch(err =>{
         console.log(err);
@@ -66,7 +68,7 @@ export default class Register extends Component {
           <Link to="/login" className="btn btn-link">Login</Link>
           <button onClick={(e) =>{
             e.preventDefault()
-            console.log(this.props.registerState)}}>check</button>
+            console.log(this.props.authState)}}>check</button>
         </form>
 
       </main>

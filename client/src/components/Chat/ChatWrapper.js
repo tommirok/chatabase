@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
-import styles from "./HomeStyle.css.js"
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import Chat from "./Chat";
 import { register, login } from "../../state/actions/authActions";
-class Home extends Component {
-  render() {
-    console.log(this.props.authState);
-    const { username } = this.props.authState.user.userData
-    return (<div style={styles.container}><p>{`Welcome ${username}`}</p></div>
-    )
-  }
-}
+
 const mapStateToProps = state => ({
   authState: state.auth,
   userState: state.user,
@@ -27,4 +19,4 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);

@@ -1,14 +1,3 @@
-import React, { Component } from 'react';
-class Chat extends Component {
-  render() {
-    
-    return (
-      <section>
-      Welcome to my forum
-      </section>
-      
-    )
-  }
-}
+import ChatWrapper from "./ChatWrapper";
 
-export default Chat;
+export default ChatWrapper;

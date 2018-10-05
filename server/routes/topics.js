@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var Models = require('../models');
+var verifyToken = require("./middleware/verifytoken");
 const Topic = Models.Topic
 // Huom! Kaikki polut alkavat polulla /topics
 
 // GET /topics
+router.use(verifyToken);
 router.get('/', function (req, res, next) {
   // Hae kaikki aihealueet tässä (Vinkki: findAll)
   Topic.findAll().then(topics => {
