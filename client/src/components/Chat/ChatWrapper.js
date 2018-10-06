@@ -4,19 +4,19 @@ import Chat from "./Chat";
 import { register, login } from "../../state/actions/authActions";
 
 const mapStateToProps = state => ({
-  authState: state.auth,
-  userState: state.user,
-  alertState: state.alert,
-  registerState: state.register
+	authState: state.auth,
+	userState: state.user,
+	alertState: state.alert,
+	registerState: state.register
 });
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      register,
-      login
-    },
-    dispatch
-  );
+	return bindActionCreators(
+		{
+			register,
+			login
+		},
+		dispatch
+	);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import styles from "./ChatStyle.css.js"
+import React, { Component } from "react";
+import styles from "./ChatStyle.css.js";
 class Chat extends Component {
-  render() {
+	render() {
 
-    return (
-      <section style={styles.container}>
-        <p>Welcome to my forum</p>
-      </section>
+		return (
+			<section style={styles.container}>
+				<p>Welcome to my forum</p>
+			</section>
 
-    )
-  }
+		);
+	}
 }
 
 export default Chat;
