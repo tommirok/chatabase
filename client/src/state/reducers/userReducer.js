@@ -1,4 +1,4 @@
-import userConstants from '../actionTypes/authTypes';
+import userConstants from "../actionTypes/authTypes";
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -45,6 +45,6 @@ export default (state = {}, action) => {
         })
       };
     default:
-      return state
+      return state;
   }
-}
+};

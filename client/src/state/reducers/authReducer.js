@@ -1,9 +1,13 @@
-import userConstants from '../actionTypes/authTypes';
+import userConstants from "../actionTypes/authTypes";
 
-let user = JSON.parse(localStorage.getItem('user'));
-const initialState = user ? { loggedIn: true, user } : {}
+let user = JSON.parse(localStorage.getItem("user"));
+const initialState = user ? { loggedIn: true, user } : {
+  user: {
+    userData: {}
+  }
+};
 
-export default(state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case userConstants.LOGIN_REQUEST:
       return {
@@ -25,6 +29,6 @@ export default(state = initialState, action) => {
     case userConstants.LOGOUT:
       return {};
     default:
-      return state
+      return state;
   }
-}
+};

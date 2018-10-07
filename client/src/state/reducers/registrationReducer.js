@@ -1,17 +1,13 @@
 
-
-
-
-
-import userConstants from '../actionTypes/authTypes';
+import userConstants from "../actionTypes/authTypes";
 
 export default (state = {}, action) => {
   switch (action.type) {
     case userConstants.REGISTER_REQUEST:
-      return { 
+      return {
         ...state,
         registering: true
-       };
+      };
     case userConstants.REGISTER_SUCCESS:
       return {
         ...state,
@@ -25,6 +21,6 @@ export default (state = {}, action) => {
 
       };
     default:
-      return state
+      return state;
   }
-}
+};

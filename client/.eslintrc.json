@@ -3,7 +3,6 @@
         "browser": true,
         "es6": true
     },
-    
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
@@ -13,13 +12,10 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-redux"
     ],
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
         "linebreak-style": [
             "error",
             "unix"
@@ -31,6 +27,12 @@
         "semi": [
             "error",
             "always"
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1
+            }
         ]
     }
 }

@@ -1,4 +1,4 @@
-import alertConstants from '../actionTypes/alertTypes';
+import alertConstants from "../actionTypes/alertTypes";
 
 export const alertActions = {
   success,

@@ -4,10 +4,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { register, login } from "../../state/actions/authActions";
 class Home extends Component {
+	componentDidMount() {
+
+	}
 	render() {
-		console.log(this.props.authState);
-		const { username } = this.props.authState.user.userData;
-		return (<div style={styles.container}><p>{`Welcome ${username}`}</p></div>
+		return (
+
+			<div style={styles.container}><p>{`Welcome ${this.props.authState.user.userData.username}`}</p></div>
 		);
 	}
 }

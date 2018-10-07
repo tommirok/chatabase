@@ -1,26 +1,27 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Chat from "./Chat";
+import Topic from "./Topic";
 import { register, login } from "../../state/actions/authActions";
-import { getTopics, addTopic } from "../../state/actions/contentActions";
+import { getTopics } from "../../state/actions/contentActions";
 
 const mapStateToProps = state => ({
 	authState: state.auth,
 	userState: state.user,
 	alertState: state.alert,
 	registerState: state.register,
-	content: state.content
+	content: state.content,
+
 });
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
 		{
 			register,
 			login,
-			getTopics,
-			addTopic
+			getTopics
+
 		},
 		dispatch
 	);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(Topic);
