@@ -7,7 +7,7 @@ export default {
 	},
 	topicContainer: {
 		border: "1px dotted #57d6bc",
-		borderRadius: "20px",
+		borderRadius: "10px",
 		display: "flex",
 		flexDirection: "column"
 	},
@@ -31,7 +31,6 @@ export default {
 	started: {
 		flex: "1",
 		opacity: "0.8",
-		color: "#67847e",
 		fontSize: "12px"
 	},
 	titleContainer: {

@@ -8,6 +8,9 @@ export default {
 	topicListContainer: {
 		width: "70%"
 	},
+	messageListContainer: {
+		width: "70%"
+	},
 	inputContainer: {
 		width: "70%",
 		display: "flex",

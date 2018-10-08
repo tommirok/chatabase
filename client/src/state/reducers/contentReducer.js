@@ -1,7 +1,9 @@
 import contentConstants from "../actionTypes/contentTypes";
 const initialState = {
   fetchingTopics: false,
-  topics: []
+  topics: [],
+  messages: [],
+  activeTopic: {}
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -9,6 +11,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         fetchingTopics: true
+      };
+    case contentConstants.TOPIC_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetchingTopics: false,
+        activeTopic: action.payload
       };
     case contentConstants.ADD_TOPIC_SUCCESS:
       return {
@@ -33,11 +41,11 @@ export default (state = initialState, action) => {
         ...state,
         fetchingMessages: true
       };
-    case contentConstants.MESSAGE_SUCCESS:
+    case contentConstants.ADD_MESSAGE_SUCCESS:
       return {
         ...state,
         fetchingMessages: false,
-        messages: action.payload
+        messages: [...state.messages, action.payload]
       };
     case contentConstants.MESSAGE_FAILURE:
       return {

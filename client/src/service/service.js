@@ -10,11 +10,13 @@ export const service = {
   update,
   getTopics,
   addTopic,
+  getTopicById,
+  addMessage,
   delete: _delete
 };
 const userUrl = "http://localhost:5000/user";
 const topicUrl = "http://localhost:5000/topics";
-
+const messageUrl = "http://localhost:5000/messages";
 function login(user) {
   const requestOptions = {
     method: "POST",
@@ -91,12 +93,34 @@ function getTopics() {
     });
 }
 
+function getTopicById(id) {
+  const requestOptions = {
+    method: "GET",
+  };
+  return Request(`${topicUrl}/${id}`, requestOptions)
+    .then(handleResponse)
+    .then(resp => {
+      return resp;
+    });
+}
+
 function addTopic(topicToAdd) {
   const requestOptions = {
     method: "POST",
     body: JSON.stringify(topicToAdd)
   };
   return Request(`${topicUrl}`, requestOptions)
+    .then(handleResponse)
+    .then(resp => {
+      return resp;
+    });
+}
+function addMessage(messageToAdd, topicId) {
+  const requestOptions = {
+    method: "POST",
+    body: JSON.stringify(messageToAdd)
+  };
+  return Request(`${topicUrl}/${topicId}/message`, requestOptions)
     .then(handleResponse)
     .then(resp => {
       return resp;

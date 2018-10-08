@@ -8,9 +8,6 @@ class Topic extends React.Component {
       hover: false
     };
   }
-  showThread = () => {
-    console.log("showThread: " + this.props.data.id);
-  }
   onHover = () => {
     this.setState({ hover: true });
   }
@@ -21,8 +18,11 @@ class Topic extends React.Component {
     const { name, description, createdAt } = this.props.data;
     return (
       <div
+        ref={this.props.topicRef}
         style={this.state.hover ? styles.topicHover : styles.topicContainer}
-        onClick={this.showThread}
+        onClick={() => {
+          this.props.onClick(this.props.data);
+        }}
         onMouseEnter={this.onHover}
         onMouseLeave={this.offHover}>
         <div style={styles.titleContainer}>
@@ -38,7 +38,7 @@ class Topic extends React.Component {
             {`started ${createdAt}`}
           </span>
         </div>
-      </div >
+      </div>
     );
   }
 }

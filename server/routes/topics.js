@@ -4,6 +4,7 @@ var Models = require("../models")
 var verifyToken = require("./middleware/verifytoken")
 const Topic = Models.Topic
 const Message = Models.Message
+const Reply = Models.Reply
 // Huom! Kaikki polut alkavat polulla /topics
 
 // GET /topics
@@ -24,7 +25,13 @@ router.get("/:id", function (req, res, next) {
 	var topicId = req.params.id
 	console.log(topicId)
 	Topic.findOne({
-		where: { id: topicId }
+		where: { id: topicId },
+		include: {
+			model: Message,
+			include: {
+				model: Reply
+			}
+		}
 	}).then(topic => {
 		res.send(200, { topic })
 	})
