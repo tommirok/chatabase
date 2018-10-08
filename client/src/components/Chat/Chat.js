@@ -15,7 +15,8 @@ class Chat extends Component {
 			message: {
 				title: "User",
 				content: ""
-			}
+			},
+			showReplies: false
 		};
 	}
 	componentDidMount() {
@@ -23,7 +24,6 @@ class Chat extends Component {
 		this.props.getTopics()
 			.then(resp => {
 				this.setState({ showLoader: false });
-				console.log(resp);
 			})
 			.catch(err => {
 				this.setState({ showLoader: false });
@@ -54,7 +54,6 @@ class Chat extends Component {
 					.catch(err => {
 						this.setState({ showLoader: false });
 						console.log(err);
-
 					});
 			})
 			.catch(err => {
@@ -73,6 +72,11 @@ class Chat extends Component {
 				console.log(err);
 
 			});
+
+	}
+	showReplies = (message) => {
+		this.setState({ showLoader: true });
+		this.setState({ showLoader: false, showReplies: true });
 
 	}
 	render() {
@@ -96,23 +100,31 @@ class Chat extends Component {
 								newState.topic.name = e.target.value;
 								this.setState({ newState });
 							}}
-							placeholder={"title"}
-							style={styles.input} />
-						<textarea
+							placeholder={"title(mandotory)"}
+							style={styles.input1} />
+						<input
 							onChange={(e) => {
 								const newState = { ...this.state };
 								newState.topic.description = e.target.value;
 								this.setState({ newState });
 							}}
 							placeholder={"description"}
-							style={styles.textField} />
-						<button onClick={this.addTopic}>Add</button>
+							style={styles.input2} />
+						<button style={{ width: "60px", border: "1px solid black", marginLeft: "-59px", borderRadius: "15px", fontSize: "30px" }}
+							type="submit"
+							onClick={this.addTopic}>{this.state.topic.name !== "" ? "➢" : "✍"}</button>
 					</div>
 					{
 						this.props.content &&
 						<div style={styles.topicListContainer}>
 							{topics.map(topic =>
-								<Topic topicRef={el => this.topicEl = el} onClick={this.showThread} id={topic.id} key={topic.id} data={topic} />
+								<Topic
+									topicRef={el => this.topicEl = el}
+									onClick={this.showThread}
+									id={topic.id}
+									key={topic.id}
+									data={topic}
+								/>
 							)}
 
 						</div>
@@ -132,12 +144,22 @@ class Chat extends Component {
 						this.props.content &&
 						<div style={styles.messageListContainer}>
 							{activeTopic.Messages.map(message =>
-								<Message key={message.id} data={message} />
+								<Message
+									messageRef={el => this.messageEl = el}
+									onClick={this.showReplies}
+									key={message.id}
+									data={message}
+									showReplies={this.state.showReplies}
+									addReply={this.props.addReply}
+									activeTopicId={activeTopic.id}
+									getTopicById={this.props.getTopicById}
+								/>
 							)}
 						</div>
 					}
-					<div style={styles.inputContainer}>
+					<form style={styles.inputContainer}>
 						<textarea
+							onFocus={() => { console.log("focused"); }}
 							onChange={(e) => {
 								const newState = { ...this.state };
 								newState.message.content = e.target.value;
@@ -145,8 +167,10 @@ class Chat extends Component {
 							}}
 							placeholder={"description"}
 							style={styles.textField} />
-						<button onClick={this.addMessage}>Add</button>
-					</div>
+						<button
+							style={{ width: "60px", border: "1px solid black", marginLeft: "-59px", borderRadius: "15px", fontSize: "30px" }}
+							onClick={this.addMessage}>{this.state.message.content !== "" ? "➢" : "✍"}</button>
+					</form>
 				</main>
 
 			);

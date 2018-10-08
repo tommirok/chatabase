@@ -120,5 +120,34 @@ export const addMessage = (messageToAdd, topicId) => (dispatch) => {
     });
 
 };
+const _addReply = () => ({
+  type: types.REPLY_REQUEST
+});
+const _addReplySuccess = (data) => ({
+  type: types.ADD_REPLY_SUCCESS,
+  payload: data
+});
+const _addReplyRejected = (error) => ({
+  type: types.REPLY_FAILURE,
+  error
+});
+export const addReply = (messageToAdd, messageId) => (dispatch) => {
+
+  dispatch(_addReply());
+
+  return service.addReply(messageToAdd, messageId)
+    .then(
+      resp => {
+        console.log(resp);
+        dispatch(_addReplySuccess(resp.reply));
+        return resp;
+      }
+    )
+    .catch(err => {
+      dispatch(_addReplyRejected(err));
+      return Promise.reject(err);
+    });
+
+};
 
 // prefixed function name with underscore because delete is a reserved word in javascript

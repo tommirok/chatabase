@@ -12,6 +12,7 @@ export default {
 		backgroundColor: "rgba(65, 120, 120, 0.3)"
 	},
 	messageHover: {
+		borderRadius: "10px",
 		padding: "20px",
 		color: "black",
 		opacity: "0.7",
@@ -46,5 +47,31 @@ export default {
 	text: {
 		margin: "0",
 		padding: "5px"
-	}
+	},
+	replyContainer: {
+		margin: " 10px",
+		border: "1px dotted #67847e",
+		borderRadius: "10px",
+		display: "flex",
+		flexDirection: "column",
+		padding: "20px",
+		backgroundColor: "rgba(65, 120, 120, 0.3)"
+	},
+	textField: {
+		flex: "4",
+		fontSize: "16px",
+		paddingLeft: "12px",
+		borderRadius: "15px",
+		height: "40px",
+		resize: "none",
+		outlineColor: "rgba(65, 120, 120, 0.6)"
+	},
+	inputContainer: {
+		width: "70%",
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginBottom: "10px"
+	},
+	
 };

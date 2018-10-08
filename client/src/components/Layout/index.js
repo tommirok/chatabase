@@ -11,7 +11,6 @@ class Layout extends Component {
 		console.log("logging out");
 	}
 	render() {
-		console.log(this.props);
 
 		const { loggedIn } = this.props.authState;
 		return (

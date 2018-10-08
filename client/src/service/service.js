@@ -12,6 +12,7 @@ export const service = {
   addTopic,
   getTopicById,
   addMessage,
+  addReply,
   delete: _delete
 };
 const userUrl = "http://localhost:5000/user";
@@ -121,6 +122,17 @@ function addMessage(messageToAdd, topicId) {
     body: JSON.stringify(messageToAdd)
   };
   return Request(`${topicUrl}/${topicId}/message`, requestOptions)
+    .then(handleResponse)
+    .then(resp => {
+      return resp;
+    });
+}
+function addReply(replyToAdd, messageId) {
+  const requestOptions = {
+    method: "POST",
+    body: JSON.stringify(replyToAdd)
+  };
+  return Request(`${messageUrl}/${messageId}/reply`, requestOptions)
     .then(handleResponse)
     .then(resp => {
       return resp;

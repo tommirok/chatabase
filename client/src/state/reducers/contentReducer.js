@@ -3,6 +3,7 @@ const initialState = {
   fetchingTopics: false,
   topics: [],
   messages: [],
+  replies: [],
   activeTopic: {}
 };
 export default (state = initialState, action) => {
@@ -58,11 +59,11 @@ export default (state = initialState, action) => {
         ...state,
         fetchingReplies: true
       };
-    case contentConstants.REPLY_SUCCESS:
+    case contentConstants.ADD_REPLY_SUCCESS:
       return {
         ...state,
         fetchingReplies: false,
-        replies: action.payload
+        replies: [...state.replies, action.payload]
       };
     case contentConstants.REPLY_FAILURE:
       return {

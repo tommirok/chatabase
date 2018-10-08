@@ -15,14 +15,22 @@ export default {
 		width: "70%",
 		display: "flex",
 		flexDirection: "row",
-		justifyContent: "space-between"
+		justifyContent: "space-between",
+		marginBottom: "10px"
 	},
-	input: {
-		flex: "2",
-		fontSize: "16px",
+	input1: {
+		flex: "1",
+		fontSize: "18px",
 		paddingLeft: "12px",
 		borderRadius: "15px",
-		height: "25px",
+		height: "40px",
+	},
+	input2: {
+		flex: "3",
+		fontSize: "18px",
+		paddingLeft: "12px",
+		borderRadius: "15px",
+		height: "40px",
 	},
 	textField: {
 		flex: "4",
@@ -30,7 +38,8 @@ export default {
 		paddingLeft: "12px",
 		borderRadius: "15px",
 		height: "40px",
-		resize: "none"
+		resize: "none",
+		outlineColor: "rgba(65, 120, 120, 0.6)"
 	},
 
 	addBtn: {
