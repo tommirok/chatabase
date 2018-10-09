@@ -21,7 +21,7 @@ app.use("/topics", topicsRoute)
 
 app.use("/messages", messageRoutes)
 
-app.get("*", function (req, res, next) {
+app.get(/.*/, function (req, res, next) {
 	res.sendFile(path.resolve(__dirname, "../client/build/index.html"))
 })
 app.listen(PORT, function () {
