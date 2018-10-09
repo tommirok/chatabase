@@ -15,9 +15,9 @@ export const service = {
   addReply,
   delete: _delete
 };
-const userUrl = "http://localhost:5000/user";
-const topicUrl = "http://localhost:5000/topics";
-const messageUrl = "http://localhost:5000/messages";
+const userUrl = "/user";
+const topicUrl = "/topics";
+const messageUrl = "/messages";
 
 function login(user) {
   const requestOptions = {
