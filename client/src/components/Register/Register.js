@@ -66,10 +66,6 @@ export default class Register extends Component {
 					<input style={styles.input} name="confirm" type="password" onChange={this.handleConfirmInput} />
 					<button onClick={this.sendLogin}>Sign</button>
 					<Link to="/login" className="btn btn-link">Login</Link>
-					<button onClick={(e) => {
-						e.preventDefault();
-						console.log(this.props.authState);
-					}}>check</button>
 				</form>
 
 			</main>

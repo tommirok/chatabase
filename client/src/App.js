@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Layout from "./components/Layout";
 import Message from "./components/Message";
 import Register from "./components/Register";
+import { PrivateRoute } from "./components/PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./state/store";
 class App extends Component {
@@ -17,7 +18,7 @@ class App extends Component {
 				<Provider store={store}>
 					<Layout>
 						<Route exact path="/" component={Home} />
-						<Route path="/chat" component={Chat} />
+						<PrivateRoute path="/chat" component={Chat} />
 						<Route path="/login" component={Login} />
 						<Route path="/register" component={Register} />
 					</Layout>

@@ -41,7 +41,8 @@ export const login = (user) => (dispatch) => {
 
 export const logout = () => (dispatch) => {
   service.logout();
-  return { type: types.LOGOUT };
+  history.push("/chat");
+  dispatch({ type: types.LOGOUT });
 };
 
 const _register = () => ({

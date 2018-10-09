@@ -27,7 +27,12 @@ export default (state = initialState, action) => {
         loggingin: false,
       };
     case userConstants.LOGOUT:
-      return {};
+      return {
+        ...state,
+        loggedIn: false,
+        userData: {},
+        user: { userData: {} }
+      };
     default:
       return state;
   }

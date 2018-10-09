@@ -139,7 +139,10 @@ class Chat extends Component {
 			return (
 
 				<main style={styles.container}>
-					<p>Browse and create topics</p>
+					<a style={{ cursor: "pointer" }} onClick={() => {
+						this.setState({ page: "topics" });
+					}}>⏎ Back To Threads</a>
+					<h3>{activeTopic.name}</h3>
 					{
 						this.props.content &&
 						<div style={styles.messageListContainer}>
@@ -157,7 +160,7 @@ class Chat extends Component {
 							)}
 						</div>
 					}
-					<form style={styles.inputContainer}>
+					<div style={styles.inputContainer2}>
 						<textarea
 							onFocus={() => { console.log("focused"); }}
 							onChange={(e) => {
@@ -165,12 +168,12 @@ class Chat extends Component {
 								newState.message.content = e.target.value;
 								this.setState({ newState });
 							}}
-							placeholder={"description"}
+							placeholder={"Write..."}
 							style={styles.textField} />
 						<button
 							style={{ width: "60px", border: "1px solid black", marginLeft: "-59px", borderRadius: "15px", fontSize: "30px" }}
 							onClick={this.addMessage}>{this.state.message.content !== "" ? "➢" : "✍"}</button>
-					</form>
+					</div>
 				</main>
 
 			);

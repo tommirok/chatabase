@@ -9,9 +9,19 @@ export default {
 		width: "70%"
 	},
 	messageListContainer: {
-		width: "70%"
+		width: "70%",
+		marginBottom: "60px"
 	},
 	inputContainer: {
+		width: "70%",
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginBottom: "10px"
+	},
+	inputContainer2: {
+		position: "fixed",
+		bottom: "0",
 		width: "70%",
 		display: "flex",
 		flexDirection: "row",

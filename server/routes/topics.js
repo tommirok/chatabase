@@ -5,11 +5,11 @@ var verifyToken = require("./middleware/verifytoken")
 const Topic = Models.Topic
 const Message = Models.Message
 const Reply = Models.Reply
+const User = Models.User
 // Huom! Kaikki polut alkavat polulla /topics
 
 // GET /topics
-//router.use(verifyToken)
-router.get("/", function (req, res, next) {
+router.get("/", verifyToken, function (req, res, next) {
 	// Hae kaikki aihealueet tässä (Vinkki: findAll)
 	Topic.findAll().then(topics => {
 		res.send(200, { topics })
@@ -26,12 +26,17 @@ router.get("/:id", function (req, res, next) {
 	console.log(topicId)
 	Topic.findOne({
 		where: { id: topicId },
-		include: {
+		include: [{
+			model: User,
 			model: Message,
 			include: {
-				model: Reply
+				model: User,
+				model: Reply,
+				include: {
+					model: User
+				}
 			}
-		}
+		}]
 	}).then(topic => {
 		res.send(200, { topic })
 	})
@@ -42,9 +47,10 @@ router.get("/:id", function (req, res, next) {
 })
 
 // POST /topics
-router.post("/", function (req, res, next) {
+router.post("/", verifyToken, function (req, res, next) {
 	// Lisää tämä aihealue
 	var topicToAdd = req.body
+	topicToAdd.UserId = req.userId
 	console.log(topicToAdd)
 	if (!topicToAdd.name) {
 		res.send(400, { message: "parameter [name] not present" })
@@ -76,13 +82,16 @@ router.post("/", function (req, res, next) {
 })
 
 // POST /topics/:id/message
-router.post("/:id/message", function (req, res, next) {
+router.post("/:id/message", verifyToken, function (req, res, next) {
 	// Lisää tällä id:llä varustettuun aihealueeseen...
 	var topicId = req.params.id
 	// ...tämä viesti (Vinkki: lisää ensin messageToAdd-objektiin kenttä TopicId, jonka arvo on topicId-muuttujan arvo ja käytä sen jälkeen create-funktiota)
 	var messageToAdd = req.body
 	if (topicId && messageToAdd) {
 		messageToAdd.TopicId = topicId
+		console.log(req.userName)
+		messageToAdd.userName = req.userName
+		messageToAdd.UserId = req.userId
 		console.log(messageToAdd)
 		Topic.findOne({
 			where: { id: topicId }

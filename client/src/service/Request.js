@@ -1,9 +1,8 @@
 
-var token = localStorage.getItem("token") || "";
+import { authHeader } from "../helpers/authHeader";
+var user = JSON.parse(localStorage.getItem("user")) || {};
+console.log(user.token);
 export default (uri, opts) => {
-  opts.headers = {
-    "Content-Type": "application/json",
-    "x-access-token": `Bearer ${token}`
-  };
+  opts.headers = authHeader();
   return fetch(uri, opts);
 };

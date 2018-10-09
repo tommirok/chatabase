@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import styles from "./LayoutStyles.css.js";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { register, login } from "../../state/actions/authActions";
+import { register, login, logout } from "../../state/actions/authActions";
 import { withRouter } from "react-router-dom";
 
 class Layout extends Component {
 	logOut = () => {
-		console.log("logging out");
+		this.props.logout();
 	}
 	render() {
+		console.log(this.props.authState);
 
 		const { loggedIn } = this.props.authState;
 		return (
@@ -32,7 +33,6 @@ class Layout extends Component {
 	}
 }
 
-
 const mapStateToProps = state => ({
 	authState: state.auth,
 	userState: state.user,
@@ -43,7 +43,8 @@ const mapDispatchToProps = dispatch => {
 	return bindActionCreators(
 		{
 			register,
-			login
+			login,
+			logout
 		},
 		dispatch
 	);

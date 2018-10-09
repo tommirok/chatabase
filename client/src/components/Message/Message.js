@@ -4,6 +4,7 @@ class Message extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showLoader: false,
       hover: false,
       showReplies: false,
       reply: {
@@ -26,9 +27,6 @@ class Message extends React.Component {
         console.log(resp);
         this.setState({ showLoader: false });
         this.props.getTopicById(this.props.activeTopicId)
-          .then(resp => {
-            this.setState({ showLoader: false, page: "messages" });
-          })
           .catch(err => {
             this.setState({ showLoader: false });
             console.log(err);
@@ -41,16 +39,21 @@ class Message extends React.Component {
   }
   render() {
 
-    const { title, content, createdAt, Replies } = this.props.data;
+    const { userName, content, createdAt, Replies } = this.props.data;
+    if (this.state.showLoader) {
+      return (
+        <h1>Loading...</h1>
+      );
+    }
     return (
       <div
         ref={this.props.messageRef}
-        style={this.state.hover ? styles.messageHover : styles.messageContainer}
+        style={this.state.hover || this.state.showReplies ? styles.messageHover : styles.messageContainer}
       >
         <div
           style={styles.titleContainer}>
           <h3>
-            {title}
+            {userName || "anon"}
           </h3>
         </div>
         <div
@@ -72,7 +75,7 @@ class Message extends React.Component {
             <div key={reply.id} style={styles.replyContainer}>
               <div style={styles.titleContainer}>
                 <h3>
-                  {title}
+                  {reply.User && reply.User.username || "anon"}
                 </h3>
               </div>
               <div style={styles.textContainer}>
@@ -89,17 +92,22 @@ class Message extends React.Component {
         {this.state.showReplies &&
           <div style={styles.inputContainer}>
             <textarea
-              onFocus={() => { console.log("focused"); }}
+              ref={e => this.replyInput = e}
               onChange={(e) => {
                 const newState = { ...this.state };
                 newState.reply.content = e.target.value;
                 this.setState({ newState });
               }}
-              placeholder={"description"}
+              placeholder={"Reply..."}
               style={styles.textField} />
             <button
-              style={{ width: "60px", border: "1px solid black", marginLeft: "-59px", borderRadius: "15px", fontSize: "30px" }}
+              style={{ zIndex: "+2", width: "60px", height: "47px", border: "1px solid black", marginLeft: "-59px", borderRadius: "15px", fontSize: "30px" }}
               onClick={this.addReply}>{this.state.reply.content !== "" ? "➢" : "✍"}</button>
+            <a
+              style={{ margin: "20px", zIndex: "+1", fontSize: "20px" }}
+              onClick={() => {
+                this.setState({ showReplies: !this.state.showReplies });
+              }}>⇪</a>
           </div>
         }
       </div>

@@ -3,6 +3,7 @@ var router = express.Router()
 var Models = require("../models")
 const Message = Models.Message
 const Reply = Models.Reply
+var verifyToken = require("./middleware/verifytoken")
 
 // Huom! Kaikki polut alkavat polulla /messages
 router.get("/", function (req, res, next) {
@@ -19,7 +20,7 @@ router.get("/:id", function (req, res, next) {
 	// Hae viesti tällä id:llä ja siihen liittyvät vastaukset tässä (Vinkki: findOne ja sopiva include)
 	var messageId = req.params.id
 	Message.findOne({
-		where: { id: messageId},
+		where: { id: messageId },
 		include: [{
 			model: Reply,
 			where: { MessageId: messageId },
@@ -27,26 +28,27 @@ router.get("/:id", function (req, res, next) {
 		}]
 	})
 		.then(msg => {
-			if(!msg){
-				res.send(400, {error: "message with present id not found"})
+			if (!msg) {
+				res.send(400, { error: "message with present id not found" })
 				return
 			}
-			res.send(200, {msg})
+			res.send(200, { msg })
 		})
 		.catch(err => {
 			res.send(400, { err })
 		})
 })
 // POST /messages/:id/reply
-router.post("/:id/reply", function (req, res, next) {
+router.post("/:id/reply", verifyToken, function (req, res, next) {
 	// Lisää tällä id:llä varustettuun viestiin...
 	var messageId = req.params.id
 	// ...tämä vastaus (Vinkki: lisää ensin replyToAdd-objektiin kenttä MessageId, jonka arvo on messageId-muuttujan arvo ja käytä sen jälkeen create-funktiota)
 	var replyToAdd = req.body
 	if (messageId && replyToAdd) {
 		replyToAdd.MessageId = messageId
+		replyToAdd.UserId = req.userId
 		console.log(replyToAdd)
-		Reply.findOne({
+		Message.findOne({
 			where: { id: messageId }
 		})
 			.then(e => {
@@ -56,6 +58,7 @@ router.post("/:id/reply", function (req, res, next) {
 							res.send(200, { rep })
 						})
 						.catch(err => {
+
 							console.log(err)
 
 						})
@@ -64,6 +67,7 @@ router.post("/:id/reply", function (req, res, next) {
 				}
 			})
 			.catch(err => {
+				res.send(400, { error: "message does not exist with specified messageId" })
 				console.log(err)
 			})
 	} else {

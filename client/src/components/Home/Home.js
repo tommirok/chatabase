@@ -10,7 +10,7 @@ class Home extends Component {
 	render() {
 		return (
 
-			<div style={styles.container}><p>{`Welcome ${this.props.authState.user.userData.username}`}</p></div>
+			<div style={styles.container}><p>{`Welcome ${this.props.authState.user.userData.username || ""}`}</p></div>
 		);
 	}
 }

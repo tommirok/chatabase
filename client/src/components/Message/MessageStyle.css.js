@@ -3,7 +3,7 @@ export default {
 		display: "flex"
 	},
 	messageContainer: {
-		margin: " 10px",
+		marginBottom: "10px",
 		border: "1px dotted #67847e",
 		borderRadius: "10px",
 		display: "flex",
@@ -12,12 +12,15 @@ export default {
 		backgroundColor: "rgba(65, 120, 120, 0.3)"
 	},
 	messageHover: {
+		marginBottom: "10px",
+		marginLeft: "-40px",
+		marginRight: "-40px",
 		borderRadius: "10px",
 		padding: "20px",
 		color: "black",
 		opacity: "0.7",
 		backgroundColor: "rgba(0, 0, 0, 0.1)",
-		border: "0.5px solid #67847e",
+		border: "1px solid #67847e",
 		display: "flex",
 		flexDirection: "column",
 		cursor: "pointer",
@@ -30,6 +33,7 @@ export default {
 	textContainer: {
 		padding: "0px",
 		borderRadius: "10px",
+		border: "1px solid #67847e",
 		backgroundColor: "white",
 		display: "inline-block",
 		flexDirection: "row",
@@ -64,7 +68,8 @@ export default {
 		borderRadius: "15px",
 		height: "40px",
 		resize: "none",
-		outlineColor: "rgba(65, 120, 120, 0.6)"
+		outlineColor: "rgba(65, 120, 120, 0.6)",
+		zIndex: "+1"
 	},
 	inputContainer: {
 		width: "70%",
@@ -73,5 +78,5 @@ export default {
 		justifyContent: "space-between",
 		marginBottom: "10px"
 	},
-	
+
 };
