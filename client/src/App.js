@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, HashRouter } from "react-router-dom";
 import Home from "./components/Home";
 import Chat from "./components/Chat";
 import Login from "./components/Login";
@@ -14,7 +14,7 @@ class App extends Component {
 	render() {
 		return (
 
-			<BrowserRouter>
+			<HashRouter>
 				<Provider store={store}>
 					<Layout>
 						<Route exact path="/" component={Home} />
@@ -23,7 +23,7 @@ class App extends Component {
 						<Route path="/register" component={Register} />
 					</Layout>
 				</Provider>
-			</BrowserRouter>
+			</HashRouter>
 
 		);
 	}

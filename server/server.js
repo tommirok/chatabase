@@ -12,13 +12,16 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use("public", express.static(path.join(__dirname, "../client/build")))
 app.use("public", express.static(path.join(__dirname, "../client/public")))
+
+app.use("/", routes)
+
 app.use("/user", userRoute)
 
 app.use("/topics", topicsRoute)
 
 app.use("/messages", messageRoutes)
 
-app.get("*", (req, res) => {
+app.get("*", function (req, res, next) {
 	res.sendFile(path.resolve(__dirname, "../client/build/index.html"))
 })
 app.listen(PORT, function () {

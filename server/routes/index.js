@@ -1,6 +1,9 @@
 const express = require("express")
 const router = express.Router()
 var secret = "tWbln76jYM"
+const path = require("path")
+
+router.use("public", express.static(path.join(__dirname, "../client/public")))
 router.get("/me", function (req, res, next) {
 	var token = req.headers["x-access-token"]
 	if (!token) return res.status(401).send({ auth: false, message: "No token provided." })
@@ -22,8 +25,6 @@ router.get("/me", function (req, res, next) {
 router.use(function (user, req, res, next) {
 	res.status(200).send(user)
 })
-router.get("/", function (req, res, next) {
-	res.send("now then")
-})
+
 
 module.exports = router
