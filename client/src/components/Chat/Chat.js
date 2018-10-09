@@ -27,7 +27,7 @@ class Chat extends Component {
 			})
 			.catch(err => {
 				this.setState({ showLoader: false });
-				console.log(err);
+				err = "TypeError: Failed to fetch" && this.props.logout();
 			});
 
 	}
@@ -69,6 +69,8 @@ class Chat extends Component {
 			})
 			.catch(err => {
 				this.setState({ showLoader: false });
+				console.log(err.TypeError);
+
 				console.log(err);
 
 			});
@@ -171,7 +173,7 @@ class Chat extends Component {
 							placeholder={"Write..."}
 							style={styles.textField} />
 						<button
-							style={{ width: "60px", border: "1px solid black", marginLeft: "-59px", borderRadius: "15px", fontSize: "30px" }}
+							style={{ zIndex: "+2", width: "60px", border: "1px solid black", marginLeft: "-59px", borderRadius: "15px", fontSize: "30px" }}
 							onClick={this.addMessage}>{this.state.message.content !== "" ? "➢" : "✍"}</button>
 					</div>
 				</main>

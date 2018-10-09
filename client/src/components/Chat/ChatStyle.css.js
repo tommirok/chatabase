@@ -10,7 +10,7 @@ export default {
 	},
 	messageListContainer: {
 		width: "70%",
-		marginBottom: "60px"
+		marginBottom: "100px"
 	},
 	inputContainer: {
 		width: "70%",
@@ -21,7 +21,8 @@ export default {
 	},
 	inputContainer2: {
 		position: "fixed",
-		bottom: "0",
+		bottom: "50px",
+		top: "8",
 		width: "70%",
 		display: "flex",
 		flexDirection: "row",
@@ -47,8 +48,7 @@ export default {
 		fontSize: "16px",
 		paddingLeft: "12px",
 		borderRadius: "15px",
-		height: "40px",
-		resize: "none",
+
 		outlineColor: "rgba(65, 120, 120, 0.6)"
 	},
 

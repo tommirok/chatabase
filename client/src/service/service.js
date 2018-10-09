@@ -102,6 +102,7 @@ function getTopicById(id) {
   return Request(`${topicUrl}/${id}`, requestOptions)
     .then(handleResponse)
     .then(resp => {
+      console.log(resp);
       return resp;
     });
 }
@@ -141,6 +142,7 @@ function addReply(replyToAdd, messageId) {
 }
 
 function handleResponse(response) {
+
   return response.text().then(text => {
     const data = text && JSON.parse(text);
     if (!response.ok) {

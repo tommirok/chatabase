@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Chat from "./Chat";
-import { register, login } from "../../state/actions/authActions";
+import { register, login, logout } from "../../state/actions/authActions";
 import { getTopics, getTopicById, addTopic, addMessage, addReply } from "../../state/actions/contentActions";
 
 const mapStateToProps = state => ({
@@ -20,7 +20,8 @@ const mapDispatchToProps = dispatch => {
 			addTopic,
 			getTopicById,
 			addMessage,
-			addReply
+			addReply,
+			logout
 		},
 		dispatch
 	);
