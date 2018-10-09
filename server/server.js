@@ -18,7 +18,7 @@ app.use("/topics", topicsRoute)
 app.use("/messages", messageRoutes)
 
 app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname + "/client/build/index.html"))
+	res.sendFile(path.join(__dirname, "../client/build/index.html"))
 })
 app.listen(PORT, function () {
 	console.log(`Listening on port ${PORT}`)
