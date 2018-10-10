@@ -26,13 +26,15 @@ class Topic extends React.Component {
         onMouseEnter={this.onHover}
         onMouseLeave={this.offHover}>
         <div style={styles.titleContainer}>
-          <h1>
-            {name}
-          </h1>
+          <h2>
+            <i>{name}</i>
+          </h2>
         </div>
         <div style={styles.descriptionContainer}>
           <p style={styles.description}>
-            {description}
+            <i>
+              {description}
+            </i>
           </p>
           <span style={styles.started}>
             {`started ${createdAt}`}

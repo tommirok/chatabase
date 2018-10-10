@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./MessageStyle.css.js";
+import dom from "react-dom";
+
 class Message extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,10 @@ class Message extends React.Component {
         content: ""
       }
     };
+  }
+  componentDidMount() {
+
+
   }
   onHover = () => {
     this.setState({ hover: true });
@@ -53,7 +59,9 @@ class Message extends React.Component {
         <div
           style={styles.titleContainer}>
           <h3>
-            {userName || "anon"}
+            <i>
+              {userName || "anon"}
+            </i>
           </h3>
         </div>
         <div

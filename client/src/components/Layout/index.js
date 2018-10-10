@@ -15,7 +15,7 @@ class Layout extends Component {
 
 		const { loggedIn } = this.props.authState;
 		return (
-			<div>
+			<div style={{ height: "100%" }}>
 				<ul style={styles.list}>
 					<li><Link to={"/"}><div style={styles.navButton}>Home</div></Link></li>
 					<li><Link to={"/chat"}><div style={styles.navButton}>Chat</div></Link></li>

@@ -11,6 +11,8 @@ import { Provider } from "react-redux";
 import store from "./state/store";
 class App extends Component {
 
+	componentDidMount() {
+	}
 	render() {
 		return (
 

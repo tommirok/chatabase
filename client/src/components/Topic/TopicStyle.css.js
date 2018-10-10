@@ -6,12 +6,14 @@ export default {
 		alignItems: "center",
 	},
 	topicContainer: {
+		padding: "20px",
 		border: "1px dotted #57d6bc",
 		borderRadius: "10px",
 		display: "flex",
 		flexDirection: "column"
 	},
 	topicHover: {
+		padding: "20px",
 		color: "white",
 		opacity: "0.7",
 		backgroundColor: "rgba(47, 122, 106, 0.5)",

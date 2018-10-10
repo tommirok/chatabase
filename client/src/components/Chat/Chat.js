@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import dom from "react-dom";
+
 import styles from "./ChatStyle.css.js";
 import Topic from "../Topic";
 import Message from "../Message/Message.js";
@@ -19,7 +21,10 @@ class Chat extends Component {
 			showReplies: false
 		};
 	}
+
 	componentDidMount() {
+		console.log(dom.findDOMNode(this));
+
 		this.setState({ showLoader: true });
 		this.props.getTopics()
 			.then(resp => {
@@ -50,6 +55,7 @@ class Chat extends Component {
 				this.props.getTopicById(this.props.content.activeTopic.id)
 					.then(resp => {
 						this.setState({ showLoader: false, page: "messages" });
+						window.scrollTo(0, document.body.scrollHeight);
 					})
 					.catch(err => {
 						this.setState({ showLoader: false });
@@ -84,11 +90,7 @@ class Chat extends Component {
 	render() {
 		const { topics, activeTopic } = this.props.content;
 		const { page } = this.state;
-		if (this.state.showLoader) {
-			return (
-				<h1>Loading...</h1>
-			);
-		}
+
 		//TOPICS PAGE >>>>>>>>>>>>>>>>>>>>>>>>>>>																TOPICS PAGE >>>>>>>>>>>>>>>>>>>>>>>>>>>
 		if (page === "topics") {
 			return (
@@ -141,10 +143,13 @@ class Chat extends Component {
 			return (
 
 				<main style={styles.container}>
-					<a style={{ cursor: "pointer" }} onClick={() => {
+					<i style={{ cursor: "pointer" }} onClick={() => {
 						this.setState({ page: "topics" });
-					}}>⏎ Back To Threads</a>
-					<h3>{activeTopic.name}</h3>
+					}}>⏎ Back To Threads</i>
+					<i style={{ fontSize: "26px", marginTop: "15px" }}>{activeTopic.name}</i>
+					<i style={{ fontSize: "18px", cursor: "pointer", position: "fixed", top: "120px", left: "120px" }} onClick={() => {
+						window.scrollTo(0, document.body.scrollHeight);
+					}}>go down ⤵</i>
 					{
 						this.props.content &&
 						<div style={styles.messageListContainer}>
@@ -164,7 +169,11 @@ class Chat extends Component {
 					}
 					<div style={styles.inputContainer2}>
 						<textarea
-							onFocus={() => { console.log("focused"); }}
+							onFocus={() => {
+								console.log("focused");
+								window.scrollTo(0, document.body.scrollHeight);
+
+							}}
 							onChange={(e) => {
 								const newState = { ...this.state };
 								newState.message.content = e.target.value;
@@ -175,6 +184,9 @@ class Chat extends Component {
 						<button
 							style={{ zIndex: "+2", width: "60px", border: "1px solid black", marginLeft: "-59px", borderRadius: "15px", fontSize: "30px" }}
 							onClick={this.addMessage}>{this.state.message.content !== "" ? "➢" : "✍"}</button>
+						<i style={{ fontSize: "18px", cursor: "pointer", position: "fixed", bottom: "120px", right: "120px" }} onClick={() => {
+							window.scrollTo(0, 0);
+						}}>⤴ back up</i>
 					</div>
 				</main>
 
