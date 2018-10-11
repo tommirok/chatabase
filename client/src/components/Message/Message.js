@@ -11,11 +11,13 @@ class Message extends React.Component {
       showReplies: false,
       reply: {
         content: ""
-      }
+      },
+      r: Math.floor(Math.random() * Math.floor(254)),
+      g: Math.floor(Math.random() * Math.floor(254)),
+      b: Math.floor(Math.random() * Math.floor(254)),
     };
   }
   componentDidMount() {
-
 
   }
   onHover = () => {
@@ -44,7 +46,7 @@ class Message extends React.Component {
       });
   }
   render() {
-
+    const { r, g, b } = this.state
     const { userName, content, createdAt, Replies } = this.props.data;
     if (this.state.showLoader) {
       return (
@@ -54,7 +56,15 @@ class Message extends React.Component {
     return (
       <div
         ref={this.props.messageRef}
-        style={this.state.hover || this.state.showReplies ? styles.messageHover : styles.messageContainer}
+        style={this.state.hover || this.state.showReplies ? styles.messageHover : {
+          marginBottom: "10px",
+          border: "1px dotted #67847e",
+          borderRadius: "10px",
+          display: "flex",
+          flexDirection: "column",
+          padding: "20px",
+          backgroundColor: `rgba(${r}, ${g}, ${b}, 0.3)`
+        }}
       >
         <div
           style={styles.titleContainer}>
